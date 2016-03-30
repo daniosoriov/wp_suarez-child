@@ -10,8 +10,8 @@ $images = get_field('pes_gallery');
 $user_ID = get_current_user_id();
 $download = (get_query_var('gallery_action', '') == 'download') ? TRUE : FALSE;
 
-$gallery_show = get_query_var('gallery_show', 25);
-$number_by_page = ($gallery_show != 'all') ? $gallery_show : 25;
+$gallery_show = get_query_var('gallery_show', 24);
+$number_by_page = ($gallery_show != 'all') ? $gallery_show : 24;
 $paged = absint(get_query_var('gallery_page', 1));
 if (filter_var($paged, FILTER_VALIDATE_INT) === false) {
   $paged = 1;
@@ -50,9 +50,9 @@ $login_attributes = array(
           <?php if ($total_pages > 1): ?>
           <div class="gallery-show">
             View by page:&nbsp;
-            <?php echo (($gallery_show == $number_by_page) ? $number_by_page : '<a href="'. post_permalink() .'?gallery_show='. $number_by_page .'">'. $number_by_page .'</a>') ?>
+            <?php echo (($gallery_show == $number_by_page) ? $number_by_page : '<a href="'. get_permalink() .'?gallery_show='. $number_by_page .'">'. $number_by_page .'</a>') ?>
             &nbsp;|&nbsp;
-            <?php echo (($gallery_show == 'all') ? 'All' : '<a href="'. post_permalink() .'?gallery_show=all">All</a>') ?>
+            <?php echo (($gallery_show == 'all') ? 'All' : '<a href="'. get_permalink() .'?gallery_show=all">All</a>') ?>
           </div>
           <?php endif; ?>
           <?php if ($gallery_show != 'all'): ?>
@@ -72,7 +72,9 @@ $login_attributes = array(
               </div>
               <div class="item-desc">
                 <span class="item-title"><?php echo $image['title']; ?></span>
+                <?php if ($image['caption']): ?>
                 <span class="item-caption"><?php echo shorten_string($image['caption'], 13) ?></span>
+                <?php endif; ?>
               </div>
             </a>
           </div>

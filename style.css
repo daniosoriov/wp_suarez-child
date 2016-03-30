@@ -94,6 +94,40 @@ section.not-found {
   left: 24px;
   top: 14px;
 }
+.btn-disabled {
+  background-color: #ddd !important;
+  cursor: not-allowed !important;
+}
+
+.info-gallery {
+  font-size: 26px !important;
+  padding: 0 10px 0 0;
+  color: #0081B8;
+  cursor: pointer;
+}
+.info-gallery-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 12px;
+  font-size: 20px !important;
+  color: #C0111D;
+  cursor: pointer;
+}
+.info-gallery-help {
+  position: absolute;
+  z-index: 10;
+  background: white;
+  padding: 15px;
+  border: #ADE7FF 1px solid;
+  border-radius: 5px;
+  top: -55px;
+  left: 45px;
+  box-shadow: 0px 0px 15px #D6F3FF;
+}
+.help-hide {
+  display: none;
+}
 .gallery-show {
   margin-bottom: 15px;
 }
@@ -128,10 +162,12 @@ section.not-found {
 .item-title, .item-caption {
   display: block;
   padding: .75em;
-  border-bottom: 1px solid #eee;
+}
+.item-title {
+  font-weight: 600;
 }
 .item-caption {
-  border-bottom: 0;
+  border-top: 1px solid #eee;
 }
 .item-title.download {
   position: absolute;
@@ -242,8 +278,8 @@ section.not-found {
   top: -1px;
 }
 .item-desc {
-  border: 1px solid #eee;
-  border-top: none;
+  /*border: 1px solid #eee;
+  border-top: none;*/
 }
 
 /* PES Search */
@@ -356,6 +392,9 @@ input[name="_sf_reset"]:hover, input[name="_sf_reset"]:focus {
 .single-post-inner.video, .single-post-inner.attachment {
   border-bottom: 0;
   margin-bottom: 0;
+}
+img.large-attachment {
+  cursor: pointer;
 }
 .pes-image-header {
   display: -webkit-box;

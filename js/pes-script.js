@@ -37,7 +37,11 @@ jQuery(document).ready(function($) {
     document.onkeydown = checkKey;
   }
   
-  $("a#hideShowDetails").click(function(event) {
+  $(".info-gallery, .info-gallery-close").click(function(event) {
+    $(".info-gallery-help").toggleClass("help-hide");
+  });
+  
+  $("a#hideShowDetails, img.large-attachment").click(function(event) {
     $(".pes-image-data").toggle(500, "easeOutSine", function() {
       if ($(this).is(":visible")) {
         $("a#hideShowDetails").text("Less info");
@@ -71,20 +75,35 @@ jQuery(document).ready(function($) {
   });
   
   if (document.getElementById("allow-downloads")) {
+    function pesUpdateDownloadButton(totalSelected) {
+      if (totalSelected > 0) {
+        $("#pes-download").removeClass("btn-disabled").prop("disabled", false).removeAttr("title");
+      }
+      else {
+        $("#pes-download").addClass("btn-disabled").prop("disabled", true).attr("title", "Select photos to download first");
+      }
+    }
+    
+    
     $("a#selectAllPhotos").click(function(event){
       $("div.item-capsule").addClass("selected");
       $("i.fa.fa-check-square").show();
-      $("span#totalSelected").text($("div.item-capsule.selected").length);
+      totalSelected = $("div.item-capsule.selected").length;
+      $("span#totalSelected").text(totalSelected);
+      pesUpdateDownloadButton(totalSelected);
     });
     $("a#clearAllPhotos").click(function(event){
       $("div.item-capsule").removeClass("selected");
       $("i.fa.fa-check-square").hide();
       $("span#totalSelected").text("0");
+      pesUpdateDownloadButton(0);
     });
     $("div.item-capsule.download").click(function(event) {
       $(this).toggleClass("selected");
       $(this).children("i.fa.fa-check-square").toggle();
-      $("span#totalSelected").text($("div.item-capsule.selected").length);
+      totalSelected = $("div.item-capsule.selected").length;
+      $("span#totalSelected").text(totalSelected);
+      pesUpdateDownloadButton(totalSelected);
     });
     
     $("div.item-capsule.download").hover(

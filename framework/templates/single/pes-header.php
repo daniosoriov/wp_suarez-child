@@ -75,8 +75,7 @@ $login_attributes = array(
       <!-- Date -->
       <?php if (get_field('pes_date')): ?>
       <p class="pes-header-p pes-date">
-        <?php $date = DateTime::createFromFormat('Ymd', get_field('pes_date')); ?>
-        <?php echo $date->format('F d, Y'); ?>
+        <?php echo get_the_date(); ?>
       </p>
       <?php endif; ?>
       <div class="pes-description">
@@ -127,11 +126,26 @@ $login_attributes = array(
         <a id="selectAllPhotos" href="javascript:void(0)"><?php echo 'Select all '. count($images) . ' photos'; ?></a> &#124;
         <a id="clearAllPhotos" href="javascript:void(0)">Clear selection</a>
       </p>
+      <p><i class="fa fa-question-circle info-gallery"></i>Need help?</p>
+      <div class="info-gallery-help help-hide">
+        <div class="item-title">Steps:</div>
+        <div><i class="fa fa-times-circle info-gallery-close"></i></div>
+        <ul>
+          <li>&#8226; Click on the photos you would like to download.</li>
+          <li>&#8226; Hit the download button on the right to start downloading.</li>
+          <li>&#8226; Download will begin automatically.</li>
+        </ul>
+        <div class="item-title">Hints:</div>
+        <ul>
+          <li>&#8226; To select all pictures click: Select all photos.</li>
+          <li>&#8226; To clear your selection click: Clear selection.</li>
+        </ul>
+      </div>
     </div>
     <div class="pes-header-right">
       <form action="<?php echo get_permalink($post_id); ?>" method="get">
         <input type="hidden" name="gallery_action" value="download" />
-        <div class="pes-download"><button type="submit" id="pes-download" class="pes-btn"><i class="fa fa-download"></i>Download selected photos</button></div>
+        <div class="pes-download"><button title="Select photos to download first" type="submit" id="pes-download" class="pes-btn btn-disabled" disabled><i class="fa fa-download"></i>Download selected photos</button></div>
       </form>
     </div>
     <?php endif; ?>

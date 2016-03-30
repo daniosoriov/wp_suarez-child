@@ -81,7 +81,7 @@ $login_attributes = array(
           </div>
           <div class="pes-image-content">
             <div class="pes-image col-xs-12 col-sm-12 col-md-9">
-              <img src="<?php echo $large_image[0] ?>"/>
+              <img class="large-attachment" src="<?php echo $large_image[0] ?>"/>
             </div>
             <div class="pes-image-data col-xs-12 col-sm-12 col-md-3">
               <div class="img-det">
