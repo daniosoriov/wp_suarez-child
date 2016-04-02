@@ -283,6 +283,9 @@ section.not-found {
 }
 
 /* PES Search */
+.ll-skin-melon .ui-datepicker .ui-datepicker-title {
+  color: #666;
+}
 .search-title {
   margin-bottom: 20px;
 }

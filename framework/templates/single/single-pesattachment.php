@@ -131,6 +131,20 @@ $login_attributes = array(
           
 
 			<?php
+          
+          
+          $url = da_download_attachment_url($attachment_id);
+          
+          echo '<br />DA URL: '.$url;
+          
+          $url = pes_download_attachment_url($attachment_id);
+          
+          echo '<br />PES URL: '.$url;
+          
+          $link = da_download_attachment_link($attachment_id);
+          echo '<br />LINK: '.$link;
+          
+          
           /*
           
           

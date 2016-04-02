@@ -28,12 +28,6 @@ $i = 0;
       <?php the_terms( $post_id, 'country', 'Countries: ', ', '); $i++; ?>
     </p>
     <?php endif; ?>
-    <?php $terms = get_the_terms($post_id, 'party'); ?>
-    <?php if ($terms && !is_wp_error($terms)): ?>
-    <p class="pes-tags-section">
-      <?php the_terms( $post_id, 'party', 'Political parties: ', ', '); $i++; ?>
-    </p>
-    <?php endif; ?>
     <?php if ($i == 0): ?>
     <p>No tags yet</p>
     <?php endif; ?>

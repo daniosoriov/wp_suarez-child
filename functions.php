@@ -86,7 +86,7 @@ function pes_hijack_query() {
   global $wp_query;
 
   // When inside a custom taxonomy archive include attachments
-  if (is_tax('meeting') || is_tax('leader') || is_tax('topic') || is_tax('country') || is_tax('party')) {
+  if (is_tax('meeting') || is_tax('leader') || is_tax('topic') || is_tax('country')) {
     //echo '<pre>QUERY '.print_r($wp_query,1).'</pre>';
     $wp_query->query_vars['post_type'] =  array( 'attachment' );
     $wp_query->query_vars['post_status'] =  array( null );
