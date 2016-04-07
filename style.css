@@ -163,7 +163,7 @@ section.not-found {
   display: block;
   padding: .75em;
 }
-.item-title {
+.item-title, .photo-title {
   font-weight: 600;
 }
 .item-caption {

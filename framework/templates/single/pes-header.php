@@ -18,6 +18,7 @@ switch ($post->post_type) {
     $images = get_field('pes_gallery');
     $number_images = ' {'. count($images) . ' Photos}';
     $download = (get_query_var('gallery_action', '') == 'download') ? TRUE : FALSE;
+    $post_download_url = pes_download_gallery_url($post_id);
     break;
     
   case 'attachment':
@@ -132,6 +133,7 @@ $login_attributes = array(
         <div><i class="fa fa-times-circle info-gallery-close"></i></div>
         <ul>
           <li>&#8226; Click on the photos you would like to download.</li>
+          <li>&#8226; Select the format you would like to download: WEB or Hi-res.</li>
           <li>&#8226; Hit the download button on the right to start downloading.</li>
           <li>&#8226; Download will begin automatically.</li>
         </ul>
@@ -143,10 +145,28 @@ $login_attributes = array(
       </div>
     </div>
     <div class="pes-header-right">
-      <form action="<?php echo get_permalink($post_id); ?>" method="get">
-        <input type="hidden" name="gallery_action" value="download" />
-        <div class="pes-download"><button title="Select photos to download first" type="submit" id="pes-download" class="pes-btn btn-disabled" disabled><i class="fa fa-download"></i>Download selected photos</button></div>
-      </form>
+      <div class="pes-download">
+        <form id="gallery-download" action="<?= $post_download_url ?>" method="post">
+          <input type="hidden" name="download_url" value="<?= $post_download_url ?>" />
+          <input type="hidden" name="photos" value="" />
+          <div class="size-btn">
+            <div id="img-box" class="btn-container" href="javascript:void(0)" data-size="web">
+              WEB
+            </div>
+            <div id="img-box" class="btn-container pressed" href="javascript:void(0)" data-size="hr">
+              Hi-res
+            </div>
+          </div>
+          <button title="Select photos to download first" 
+                  type="submit" 
+                  id="pes-download" 
+                  
+                  class="pes-btn btn-disabled" 
+                  disabled>
+            <i class="fa fa-download"></i>Download selected photos
+          </button>
+        </form>
+      </div>
     </div>
     <?php endif; ?>
     <?php endif; ?>

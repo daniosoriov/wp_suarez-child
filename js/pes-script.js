@@ -56,31 +56,34 @@ jQuery(document).ready(function($) {
   $("div#img-box").click(function(event) {
     $("div#img-box").removeClass("pressed");
     $(this).addClass("pressed", 200, "easeOutSine");
-    $("div#img-attr").html($(this).attr("data-dimension") +' / '+ $(this).attr("data-size"));
-    $("button#img-download-btn").attr("onClick", "window.location.href='"+ $(this).attr("data-id") +"'");
+    $("div#img-attr").html($(this).data("dimension") +' / '+ $(this).data("size"));
+    $("button#img-download-btn").attr("onClick", "window.location.href='"+ $(this).data("id") +"'");
+    var url = $("input[name='download_url']").val();
+    var new_url = pesChangeURL(url, 'size', $(this).data("size"));
+    $("form#gallery-download").attr("action", new_url);
   });
   
   $("div#video-box").click(function(event) {
     $("div#video-box").removeClass("pressed-video");
     $(this).addClass("pressed-video", 200, "easeOutSine");
-    $("div#video-attr").html($(this).attr("data-dimension") +' / '+ $(this).attr("data-size"));
-    $("button#video-download-btn").attr("onClick", "window.location.href='"+ $(this).attr("data-id") +"'");
-  })
-  
-  $("button#download-btn-bis").click(function(event) {
-    alert('LOGIN POP UP HERE!');
-  });
-  $("button#download-btn").click(function(event) {
-    alert("Begin download now...");
+    $("div#video-attr").html($(this).data("dimension") +' / '+ $(this).data("size"));
+    $("button#video-download-btn").attr("onClick", "window.location.href='"+ $(this).data("id") +"'");
   });
   
   if (document.getElementById("allow-downloads")) {
     function pesUpdateDownloadButton(totalSelected) {
       if (totalSelected > 0) {
         $("#pes-download").removeClass("btn-disabled").prop("disabled", false).removeAttr("title");
+        var photos = [],
+          i = 0;
+        $("div.item-capsule.selected").each(function( index ) {
+          photos[i++] = $( this ).attr('id');
+        });
+        $("input[name='photos']").val(photos);
       }
       else {
         $("#pes-download").addClass("btn-disabled").prop("disabled", true).attr("title", "Select photos to download first");
+        $("input[name='photos']").val('');
       }
     }
     

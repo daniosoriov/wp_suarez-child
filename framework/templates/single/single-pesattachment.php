@@ -21,15 +21,13 @@ if (!$caption) {
 $filepath = $uploads['basedir'] . '/' . $metadata['file'];
 $filebase = dirname($filepath);
 $web_size = pes_formatBytes(filesize($filebase .'/'. $metadata['sizes']['large']['file']), 0);
-$hq_size = pes_formatBytes(filesize($filepath), 0);
+$hr_size = pes_formatBytes(filesize($filepath), 0);
 
 $web_dimension = $metadata['sizes']['large']['width'] .' x '. $metadata['sizes']['large']['height'];
-$hq_dimension = $metadata['width'] .' x '. $metadata['height'];
+$hr_dimension = $metadata['width'] .' x '. $metadata['height'];
 
-//$web_id = pes_hash_create($large_image[0]);
-//$hq_id = pes_hash_create($attachment->guid);
-//echo da_download_attachment_url($attachment_id);
-$web_id = $hq_id = 'asd';
+$web_url = pes_download_attachment_url($attachment_id, 'web');
+$hr_url = pes_download_attachment_url($attachment_id);
 
 $parent = get_post($attachment->post_parent);
 $parent_gallery = get_field('pes_gallery', $attachment->post_parent);
@@ -86,7 +84,7 @@ $login_attributes = array(
             <div class="pes-image-data col-xs-12 col-sm-12 col-md-3">
               <div class="img-det">
                 <p><?php echo "Image {$image_number} of {$total_images}"; ?></p>
-                <p><?php echo the_title(); ?></p>
+                <p><span class="photo-title"><?php echo the_title(); ?></span></p>
                 <?php if ($caption): ?>
                   <p><?php echo $caption; ?></p>
                 <?php endif; ?>
@@ -106,18 +104,18 @@ $login_attributes = array(
                   <div id="img-box" class="btn-container" href="javascript:void(0)" 
                        data-size="<?php echo $web_size ?>"
                        data-dimension="<?php echo $web_dimension ?>" 
-                       data-id="<?php echo $web_id ?>">
+                       data-id="<?php echo $web_url ?>">
                     WEB
                   </div>
                   <div id="img-box" class="btn-container pressed" href="javascript:void(0)" 
-                       data-size="<?php echo $hq_size ?>"
-                       data-dimension="<?php echo $hq_dimension ?>" 
-                       data-id="<?php echo $hq_id ?>">
+                       data-size="<?php echo $hr_size ?>"
+                       data-dimension="<?php echo $hr_dimension ?>" 
+                       data-id="<?php echo $hr_url ?>">
                     Hi-res
                   </div>
                 </div>
-                <div id="img-attr" class="img-attr"><?php echo $hq_dimension .' / '. $hq_size ?></div>
-                <button id="img-download-btn" class="pes-btn"><i class="fa fa-download"></i>Download this photo</button>
+                <div id="img-attr" class="img-attr"><?php echo $hr_dimension .' / '. $hr_size ?></div>
+                <button type="button" id="img-download-btn" class="pes-btn" onClick="window.location.href='<?= $hr_url ?>'"><i class="fa fa-download"></i>Download this photo</button>
                 <?php endif; ?>
               </div>
             </div>
@@ -125,90 +123,6 @@ $login_attributes = array(
           </div>
           
           <?php get_template_part('framework/templates/single/pes', 'tag'); ?>
-          
-          
-          
-          
-
-			<?php
-          
-          
-          $url = da_download_attachment_url($attachment_id);
-          
-          echo '<br />DA URL: '.$url;
-          
-          $url = pes_download_attachment_url($attachment_id);
-          
-          echo '<br />PES URL: '.$url;
-          
-          $link = da_download_attachment_link($attachment_id);
-          echo '<br />LINK: '.$link;
-          
-          
-          /*
-          
-          
-				//the_content();
-          
-          
-          echo '<pre>Parent '.print_r($parent,1).'</pre>';
-          
-          
-          
-          
-              $attachment_id = get_the_ID();
-              $uploads = wp_upload_dir();
-          $options = get_option( 'download_attachments_general' );
-          $attachment = get_post_meta( $attachment_id, '_wp_attached_file', true );
-              
-          echo '<pre>Attachment'.print_r($attachment,1).'</pre>';
-          
-              echo '<pre>Uploads'.print_r($uploads,1).'</pre>';
-              echo '<pre>Options '.print_r($options,1).'</pre>';
-          
-          $filepath = apply_filters( 'da_download_attachment_filepath', $uploads['basedir'] . '/' . $attachment, $attachment_id );
-          echo '<br/>Filepath: '.$filepath;
-          
-          // file exists?
-			if ( ! file_exists( $filepath ) || ! is_readable( $filepath ) )
-				echo 'FILE DOES NOT EXIST!!!!';
-
-			// if filename contains folders
-			if ( ( $position = strrpos( $attachment, '/', 0 ) ) !== false )
-				$filename = substr( $attachment, $position + 1 );
-			else
-				$filename = $attachment;
-          
-          echo '<br/>The filename: '. $filename;
-          
-          echo '<br />rawurlencode: '.rawurldecode( $filename );
-          
-          $url = da_download_attachment_url($attachment_id);
-          
-          echo '<br />URL: '.$url;
-          
-          $link = da_download_attachment_link($attachment_id);
-          echo '<br />LINK: '.$link;
-              
-          
-              $attc = da_get_download_attachment(get_the_ID());
-              echo '<pre>DOWNLOAD ATTACHMENT'.print_r($attc,1).'</pre>';
-              
-              
-              $post_id = get_the_ID();
-				$post = get_post($post_id);
-				echo '<pre>POOOOST attachment'.print_r($post,1).'</pre>';
-
-				$meta = get_post_meta($post_id);
-				echo '<pre>META attachment'.print_r($meta,1).'</pre>';
-
-				$meta = wp_get_attachment_metadata($post_id);
-				echo '<pre>METADATA attachment'.print_r($meta,1).'</pre>';
-          
-          
-          
-          //dpes_download_attachment($attachment_id);*/
-			?>
 
 		</div><!-- .entry-content -->
 	</div>

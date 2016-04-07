@@ -110,7 +110,6 @@ $login_attributes = array(
                      alt="<?php echo $image['alt']; ?>"
                      style="background-image:url(<?php echo $image['sizes']['large']; ?>)">
                   <i class="fa fa-check-square"></i>
-                  <!--<div class="item-title download"><?php echo $image['title']; ?></div>-->
                 </div>
               </div>
               <?php endforeach; ?>
@@ -120,7 +119,6 @@ $login_attributes = array(
         </div>
         <?php endif; ?>
       <?php endif; ?>
-      
 
     </div><!-- .entry-content -->
   </div>

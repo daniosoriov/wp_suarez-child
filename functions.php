@@ -35,9 +35,6 @@ function wp_suarez_child_add_script() {
 
 
 
-
-
-
 add_action('pre_get_posts', 'pes_alter_query');
 function pes_alter_query($query) {
   if ( is_admin() || ! $query->is_main_query() )
@@ -51,34 +48,12 @@ function pes_alter_query($query) {
   
   // If we are checking an archive page for a taxonomy term then put all posts.
   if ($wp_query->is_archive && !in_array($page, $not_here) && !isset($wp_query->queried_object->ID)) {
-    //echo "Page: $page<br />";
     $query->set('post_type', 'any');
-    //$query->set('posts_per_page', 50);
   }
   //echo '<pre>QUERY '.print_r($wp_query,1).'</pre>';
   
   //we remove the actions hooked on the '__after_loop' (post navigation)
   remove_all_actions ( '__after_loop');
-  
-  
- /*
-	//gets the front page id set in options
-	$front_page_id = get_option('page_on_front');
- 
-	if ( 'page' != get_option('show_on_front') || $front_page_id != $wp_query->query_vars['page_id'] )
-		return;
- 
-	if ( !$query->is_main_query() )
-		return;
- 
-	$query-> set('post_type' ,'page');
-	$query-> set('post__in' ,array( $front_page_id , [YOUR SECOND PAGE ID]  ));
-	$query-> set('orderby' ,'post__in');
-	$query-> set('p' , null);
-	$query-> set( 'page_id' ,null);
- 
-	//we remove the actions hooked on the '__after_loop' (post navigation)
-	remove_all_actions ( '__after_loop');*/
 }
 
 add_action('parse_query', 'pes_hijack_query');
