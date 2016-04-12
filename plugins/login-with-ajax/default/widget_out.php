@@ -34,14 +34,14 @@
                 
                 <?php if ( get_option('users_can_register') && !empty($lwa_data['registration']) ) : ?>
                 <div class="um-right um-half">
-                  <a href="http://media-pes.eu/register/" target="_blank" class="um-button um-alt um-register-button"><?php esc_html_e('Register','login-with-ajax') ?></a>
+                  <a href="/register/" target="_blank" class="um-button um-alt um-register-button"><?php esc_html_e('Register','login-with-ajax') ?></a>
                 </div>
                 <?php endif; ?>
                 <div class="um-clear"></div>
                 
                 <?php if( !empty($lwa_data['remember']) ): ?>
                 <div class="um-col-alt-b">
-                  <a href="http://media-pes.eu/password-reset/" target="_blank" class="um-link-alt">Forgot your password?</a>
+                  <a href="/password-reset/" target="_blank" class="um-link-alt">Forgot your password?</a>
                 </div>
                 <?php endif; ?>
               </div>

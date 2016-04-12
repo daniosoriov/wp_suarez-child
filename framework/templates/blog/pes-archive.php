@@ -67,7 +67,7 @@ if ($excerpt) {
       <p><?php echo 'Taken on '. date('F d, Y H:i', $metadata['image_meta']['created_timestamp']); ?></p>
       <?php endif; ?>
       <?php if (get_the_date()): ?>
-      <p>Published on <?php echo get_the_date(); ?><p>
+      <p><?php echo get_the_date(); ?><p>
       <?php endif; ?>
       <?php get_template_part('framework/templates/single/pes', 'tag'); ?>
       <?php echo do_shortcode("[vc_icon_download {$do_shortcode}]") ?>
