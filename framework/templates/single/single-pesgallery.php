@@ -80,6 +80,19 @@ $login_attributes = array(
           </div>
         <?php endforeach; ?>
         </div>
+        <div class="gallery-pagination bottom">
+          <?php if ($total_pages > 1): ?>
+          <div class="gallery-show">
+            View by page:&nbsp;
+            <?php echo (($gallery_show == $number_by_page) ? $number_by_page : '<a href="'. get_permalink() .'?gallery_show='. $number_by_page .'">'. $number_by_page .'</a>') ?>
+            &nbsp;|&nbsp;
+            <?php echo (($gallery_show == 'all') ? 'All' : '<a href="'. get_permalink() .'?gallery_show=all">All</a>') ?>
+          </div>
+          <?php endif; ?>
+          <?php if ($gallery_show != 'all'): ?>
+            <?php echo pes_get_gallery_pagination($total_images, $paged, $number_by_page); ?>
+          <?php endif; ?>
+        </div>
         <?php endif; ?>
       </section>
       
